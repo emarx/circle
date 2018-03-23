@@ -1,7 +1,6 @@
 FROM hseeberger/scala-sbt
 
-ARG CLOUD_SDK_VERSION=159.0.0
-ARG SHA256SUM=5b408575407514f99ad913bd0c6991be4b46408ddc7080a6494bbf43e6ce222a
+ARG CLOUD_SDK_VERSION=194.0.0
 ENV PATH /google-cloud-sdk/bin:$PATH
 
 # Install gcloud
