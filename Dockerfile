@@ -1,7 +1,10 @@
 FROM hseeberger/scala-sbt
 
 ARG CLOUD_SDK_VERSION=194.0.0
-ENV PATH /google-cloud-sdk/bin:$PATH
+
+# Add gcloud to path
+ENV PATH /root/google-cloud-sdk/bin:$PATH
+RUN echo "PATH=$PATH" > /etc/profile
 
 # Install gcloud
 RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
@@ -14,6 +17,7 @@ RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud
 # Install Node
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
 
+# Install Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get install -y apt-transport-https && \
@@ -24,8 +28,5 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 
 # Install xunit-viewer
 RUN npm i -D xunit-viewer
-
-# Add gcloud to path
-RUN echo "PATH=$PATH:~/google-cloud-sdk/bin/" > ~/.bashrc
 
 VOLUME ["/root/.config"]
