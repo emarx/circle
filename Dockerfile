@@ -4,7 +4,6 @@ ARG CLOUD_SDK_VERSION=194.0.0
 
 # Add gcloud to path
 ENV PATH /root/google-cloud-sdk/bin:$PATH
-RUN echo "PATH=$PATH" > /etc/profile
 
 # Install gcloud
 RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
@@ -28,5 +27,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 
 # Install xunit-viewer
 RUN npm i -D xunit-viewer
+ENV PATH /root/node_modules/xunit-viewer/bin/:$PATH
+
+# Update path
+RUN echo "PATH=$PATH" > /etc/profile
 
 VOLUME ["/root/.config"]
