@@ -22,6 +22,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     yarn config set workspaces-experimental true && \
     echo "will cite" | parallel --citation
 
+# Install xunit-viewer
 RUN npm i -D xunit-viewer
+
+# Add gcloud to path
+RUN echo "PATH=$PATH:~/google-cloud-sdk/bin/" > ~/.bashrc
 
 VOLUME ["/root/.config"]
